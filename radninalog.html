@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vozni park</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">&times;</button>
+        <a href="index.html" class="w3-bar-item w3-button">Evidencija vozila</a>
+        <a href="vozaci.html" class="w3-bar-item w3-button">Evidencija vozaca</a>
+        <a href="radninalog.html" class="w3-bar-item w3-button">Radni nalog</a>
+    </div>
+
+    <div id="main">
+
+        <div class="w3-teal">
+            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <div class="w3-container">
+                <h4>Radni nalog</h4>
+            </div>
+        </div>
+
+        <div class="button-wrapper">
+            <button class="add-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Dodaj radni nalog</button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Dodaj radni nalog</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" class="form-control" placeholder="Vozilo" aria-label="Model" id="vozilo_id">
+                            <input type="text" class="form-control" placeholder="Vozac" aria-label="Username" id="vozac_id">
+                            <input type="text" class="form-control" placeholder="Opis zadatka" aria-label="Username" id="opis_zadatka">
+                            <input type="text" class="form-control" placeholder="Datum i vrijeme izdavanja" aria-label="Username" id="datum_i_vrijeme_izdavanja">
+                            <input type="text" class="form-control" placeholder="Rok zavrsavanja" aria-label="Username" id="rok_zavrsavanja">
+                            <select class="form-control" id="status">
+                                <option value="planirano">Planirano</option>
+                                <option value="u toku">U toku</option>
+                                <option value="zavrseno">Završeno</option>
+                            </select>
+                            <p id="greskaUpisa"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Odbaci</button>
+                            <button type="button" class="btn btn-primary" onclick="insertRadniNalog()">Sačuvaj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">R.br.</th>
+                        <th scope="col">Vozilo</th>
+                        <th scope="col">Vozac</th>
+                        <th scope="col">Opis zadatka</th>
+                        <th scope="col">Datum i vrijeme izdavanja</th>
+                        <th scope="col">Rok zavrsavanja</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Izmjeni</th>
+                        <th scope="col">Izbriši</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Update modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Izmjeni vozilo</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" class="form-control" placeholder="Vozilo" aria-label="Model" id="vozilo_id">
+                            <input type="text" class="form-control" placeholder="Vozac" aria-label="Username" id="vozac_id">
+                            <input type="text" class="form-control" placeholder="Opis zadatka" aria-label="Username" id="opisZadatka">
+                            <input type="text" class="form-control" placeholder="Datum i vrijeme izdavanja" aria-label="Username" id="datum_i_vrijeme_izdavanjaUpdate">
+                            <input type="text" class="form-control" placeholder="Gorivo" aria-label="Username" id="rok_zavrsavanjaUpdate">
+                            <select class="form-control" id="statusUpdate">
+                                <option value="planirano">Planirano</option>
+                                <option value="u toku">U toku</option>
+                                <option value="zavrseno">Završeno</option>
+                            </select>
+                            <p id="greskaUpisaUpdate"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Odbaci</button>
+                            <button type="button" class="btn btn-primary" onclick="updateVozilo()">Sačuvaj izmjene</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="radninalog.js"></script>
+</body>
+
+</html>
